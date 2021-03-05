@@ -1,5 +1,6 @@
 import os
 import json
+import urllib
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
@@ -12,8 +13,8 @@ def index():
 
 @app.route("/auth", methods=["GET", "POST"])
 def authenticate():
-    reqData =  json.loads(request.data)
-    return jsonify(reqData)  
+    reqData =  request.args
+    return jsonify(response=reqData, request=request.json)  
 
 
 port = int(os.getenv("PORT", 0))
